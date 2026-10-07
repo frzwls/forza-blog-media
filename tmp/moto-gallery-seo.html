@@ -1,0 +1,209 @@
+<!-- FZ-MOTOGALLERY-SEO: SEO-текст под мото-галереей (/moto-gallery). Марки кликабельны — включают фильтр .fz-gcf. -->
+<style>
+.fz-gseo{ background:#0e0e0e; padding:40px 20px 100px; box-sizing:border-box; font-family:'Noto Sans',Arial,sans-serif; color:#D6D3CB; }
+.fz-gseo *{ box-sizing:border-box; }
+.fz-gseo__wrap{ max-width:1160px; margin:0 auto; }
+.fz-gseo__eyebrow{ font-family:'Unbounded',Arial,sans-serif; font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:#B3332B; margin:0 0 18px; }
+.fz-gseo__h1{ font-family:'Unbounded',Arial,sans-serif; font-weight:800; font-size:38px; line-height:1.15; text-transform:uppercase; color:#F2F0EA; margin:0 0 22px; max-width:900px; }
+.fz-gseo__lead{ font-size:17px; line-height:1.7; color:#BDB9B0; max-width:900px; margin:0 0 48px; }
+.fz-gseo__lead b{ color:#F2F0EA; font-weight:600; }
+.fz-gseo__grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:0 0 56px; }
+.fz-gseo__card{ background:#141414; border:1px solid #232323; border-radius:14px; padding:30px 30px 26px; }
+.fz-gseo__h3{ font-family:'Unbounded',Arial,sans-serif; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.03em; color:#F2F0EA; margin:0 0 18px; }
+.fz-gseo__list{ list-style:none; margin:0; padding:0; }
+.fz-gseo__list li{ position:relative; padding:0 0 0 24px; margin:0 0 12px; font-size:15px; line-height:1.6; color:#C9C5BC; }
+.fz-gseo__list li:before{ content:""; position:absolute; left:2px; top:9px; width:9px; height:9px; border-radius:2px; background:#B3332B; transform:rotate(45deg); }
+.fz-gseo__list li b{ color:#F2F0EA; font-weight:600; }
+.fz-gseo__sec{ margin:0 0 56px; }
+.fz-gseo__intro{ font-size:15px; line-height:1.7; color:#BDB9B0; max-width:900px; margin:-6px 0 22px; }
+.fz-gseo__rows{ display:grid; grid-template-columns:repeat(2,1fr); gap:0 40px; border-top:1px solid #232323; }
+.fz-gseo__row{ display:flex; gap:18px; padding:16px 0; border-bottom:1px solid #232323; font-size:15px; line-height:1.55; }
+.fz-gseo__row h4{ flex:0 0 150px; margin:0; font-family:'Unbounded',Arial,sans-serif; font-size:13px; font-weight:600; line-height:1.5; color:#F2F0EA; padding-top:1px; }
+.fz-gseo__row span{ color:#BDB9B0; }
+.fz-gseo a.fz-gseo__brand{ color:#F2F0EA; text-decoration:none; border-bottom:1px solid transparent; transition:border-color .2s ease, color .2s ease; }
+.fz-gseo a.fz-gseo__brand:hover{ color:#fff; border-bottom-color:#B3332B; }
+.fz-gseo__note{ font-size:14px; color:#8C887F; margin:16px 0 0; }
+.fz-gseo__steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; counter-reset:fzgstep; }
+.fz-gseo__step{ background:#141414; border:1px solid #232323; border-radius:14px; padding:26px 22px; counter-increment:fzgstep; }
+.fz-gseo__step:before{ content:"0" counter(fzgstep); display:block; font-family:'Unbounded',Arial,sans-serif; font-weight:800; font-size:26px; color:#B3332B; margin:0 0 14px; }
+.fz-gseo__step h4{ font-family:'Unbounded',Arial,sans-serif; font-size:14px; font-weight:700; text-transform:uppercase; color:#F2F0EA; margin:0 0 10px; }
+.fz-gseo__step p{ font-size:14px; line-height:1.6; color:#BDB9B0; margin:0; }
+.fz-gseo__faq details{ border-bottom:1px solid #232323; }
+.fz-gseo__faq details:first-of-type{ border-top:1px solid #232323; }
+.fz-gseo__faq summary{ list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:20px 0; font-family:'Unbounded',Arial,sans-serif; font-size:15px; font-weight:600; color:#F2F0EA; }
+.fz-gseo__faq summary::-webkit-details-marker{ display:none; }
+.fz-gseo__faq summary:after{ content:"+"; flex:none; font-size:24px; font-weight:400; color:#B3332B; transition:transform .2s ease; }
+.fz-gseo__faq details[open] summary:after{ transform:rotate(45deg); }
+.fz-gseo__faq p{ margin:0 0 20px; font-size:15px; line-height:1.7; color:#BDB9B0; max-width:900px; }
+.fz-gseo__faq p a{ color:#F2F0EA; text-decoration:none; border-bottom:1px solid #B3332B; }
+.fz-gseo__legal{ font-size:12px; line-height:1.6; color:#6E6A63; margin:40px 0 0; max-width:900px; }
+/* ПК: слева фиксированная панель фильтра .fz-gcf (105…485px), сетка проектов margin-left 505 + 20 отступ карточки */
+@media (min-width:901px){
+  .fz-gseo{ padding-left:525px; padding-right:40px; }
+  .fz-gseo__wrap{ max-width:1160px; margin:0; }
+}
+/* широкий экран — по центру области справа от панели, вровень с карточками (как сетка) */
+@media (min-width:1740px){ .fz-gseo{ padding-left:calc(505px + (100% - 1685px) / 2); } }
+@media (max-width:900px){
+  .fz-gseo{ padding:30px 16px 70px; }
+  .fz-gseo__h1{ font-size:26px; }
+  .fz-gseo__lead{ font-size:16px; margin-bottom:36px; }
+  .fz-gseo__grid, .fz-gseo__rows{ grid-template-columns:1fr; }
+  .fz-gseo__card{ padding:24px 20px 20px; }
+  .fz-gseo__steps{ grid-template-columns:1fr 1fr; }
+  .fz-gseo__row{ flex-direction:column; gap:6px; }
+  .fz-gseo__row h4{ flex:none; }
+}
+@media (max-width:480px){ .fz-gseo__steps{ grid-template-columns:1fr; } }
+</style>
+<section class="fz-gseo">
+ <div class="fz-gseo__wrap">
+  <p class="fz-gseo__eyebrow">Проекты Forza Wheels · мото</p>
+  <h1 class="fz-gseo__h1">Кованые мотодиски на мотоциклах наших клиентов</h1>
+  <p class="fz-gseo__lead">В галерее — <b>реальные проекты</b>: кованые мотодиски Forza, которые мы изготовили для мотоциклов наших клиентов. Здесь <b id="fzMgLead">Harley-Davidson Street Bob 114, Ducati Diavel V4 1200 1600, Indian Scout Bobber, MV Agusta Brutale 800 RR, BMW R1200RS, Honda X-ADV 750</b>. Посмотрите, как диски выглядят на вашем мотоцикле, и закажите такой же комплект или свой дизайн.</p>
+  <div class="fz-gseo__grid">
+   <div class="fz-gseo__card">
+    <h3 class="fz-gseo__h3">Что есть в каждом проекте</h3>
+    <ul class="fz-gseo__list">
+     <li><b>Фото мотоцикла</b> с установленными дисками Forza.</li>
+     <li><b>Размеры колёс</b> — передние и задние, если они разные.</li>
+     <li><b>Модель и год</b> мотоцикла, для которого сделан комплект.</li>
+    </ul>
+   </div>
+   <div class="fz-gseo__card">
+    <h3 class="fz-gseo__h3">Как повторить понравившийся проект</h3>
+    <ul class="fz-gseo__list">
+     <li><b>Такие же диски</b> — изготовим тот же дизайн под ваш мотоцикл.</li>
+     <li><b>Свой цвет и покрытие</b> — глянец, мат, сатин, полировка или хром.</li>
+     <li><b>Другой размер</b> — подберём диаметр и ширину под вашу модель.</li>
+     <li><b>Примерка до производства</b> — покажем дизайн на вашем мотоцикле и согласуем 3D-чертёж.</li>
+     <li><b>Пожизненная гарантия</b> на структурную целостность и балансировка каждого комплекта.</li>
+    </ul>
+   </div>
+  </div>
+  <div class="fz-gseo__sec">
+   <h2 class="fz-gseo__h3">Проекты по маркам мотоциклов</h2>
+   <p class="fz-gseo__intro">Нажмите на марку — галерея выше покажет только её проекты.</p>
+   <div class="fz-gseo__rows" id="fzMgRows">
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="BMW">BMW</a></h4><span>R1200RS</span></div>
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="DUCATI">Ducati</a></h4><span>Diavel V4 1200 1600</span></div>
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="HARLEY-DAVIDSON">Harley-Davidson</a></h4><span>Street Bob 114</span></div>
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="HONDA">Honda</a></h4><span>X-ADV 750</span></div>
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="INDIAN">Indian</a></h4><span>Scout Bobber</span></div>
+<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="MV-AGUSTA">MV Agusta</a></h4><span>Brutale 800 RR</span></div>
+   </div>
+   <p class="fz-gseo__note">Вашего мотоцикла нет в галерее? Подберите диски в <a class="fz-gseo__brand" href="https://diski.kz/moto" style="border-bottom-color:#B3332B">каталоге кованых мотодисков</a> — там более 200 проектов под десятки моделей. Проекты на автомобилях — в <a class="fz-gseo__brand" href="https://diski.kz/cars-gallery" style="border-bottom-color:#B3332B">галерее авто</a>.</p>
+  </div>
+  <div class="fz-gseo__sec">
+   <h2 class="fz-gseo__h3">Как заказать</h2>
+   <div class="fz-gseo__steps">
+    <div class="fz-gseo__step"><h4>Выбор</h4><p>Пришлите проект из галереи, фото или эскиз, марку, модель и год мотоцикла.</p></div>
+    <div class="fz-gseo__step"><h4>Подбор</h4><p>Подбираем размеры и примеряем дизайн на ваш мотоцикл.</p></div>
+    <div class="fz-gseo__step"><h4>3D-чертёж</h4><p>Изготовление начинается только после того, как вы подтвердите финальный чертёж.</p></div>
+    <div class="fz-gseo__step"><h4>Доставка</h4><p>Присылаем фотоотчёт, упаковываем и доставляем комплект в ваш город.</p></div>
+   </div>
+  </div>
+  <div class="fz-gseo__faq">
+   <h2 class="fz-gseo__h3">Частые вопросы</h2>
+   <details><summary>Можно ли заказать такие же диски, как в проекте?</summary><p>Да. Пришлите ссылку на проект или фото — изготовим тот же дизайн под ваш мотоцикл, при желании в другом цвете или размере.</p></details>
+   <details><summary>Сделаете диски для мотоцикла, которого нет в галерее?</summary><p>Да, каждый комплект проектируется под конкретный мотоцикл: посадочные размеры и нагрузку. Готовые дизайны собраны в <a href="https://diski.kz/moto">каталоге мотодисков</a>.</p></details>
+   <details><summary>Сколько стоят кованые мотодиски?</summary><p>Цена зависит от модели мотоцикла, размера, дизайна и покрытия. Оставьте заявку — рассчитаем стоимость бесплатно и без обязательств.</p></details>
+   <details><summary>Доставляете ли вы в другие города?</summary><p>Да, доставляем комплекты по всему Казахстану — в Алматы, Астану и другие города — в надёжной упаковке.</p></details>
+  </div>
+ </div>
+</section>
+<script>
+(function(){
+  // клик по марке в SEO-тексте → включаем эту марку в боковом фильтре галереи (.fz-gcf) и поднимаемся к проектам
+  document.addEventListener("click", function(e){
+    var a = e.target.closest ? e.target.closest(".fz-gseo a[data-brand]") : null;
+    if (!a) return;
+    var key = a.getAttribute("data-brand");
+    var clear = document.getElementById("fzGcfClear");
+    if (!clear) return;
+    e.preventDefault();
+    clear.click();
+    var opt = document.querySelector('#fzGcfList .fz-gcf__opt[data-brand="' + key + '"]');
+    var cb = opt && opt.querySelector("input");
+    if (cb && !cb.checked) cb.click();
+    var group = document.getElementById("fzGcfGroup");
+    if (group) group.classList.add("is-open");
+    var store = document.getElementById("rec4558590803");
+    if (store) window.scrollTo({ top: store.getBoundingClientRect().top + window.pageYOffset - 100, behavior: "smooth" });
+  });
+})();
+</script>
+<script>
+(function(){
+  // Автообновление: список «Проекты по маркам мотоциклов» и фраза во вступлении строятся из товаров раздела «МОТО КЛИЕНТЫ» при каждом открытии страницы.
+  // Добавили/убрали мотоцикл в разделе магазина — здесь всё изменится само (после публикации страницы ничего делать не нужно).
+/* Группировка проектов по маркам для SEO-блока галереи (общий код: генератор в node и страница в браузере).
+   Правила марки совпадают с фильтром галереи (.fz-gcf): getBrandKey — первое слово названия или двойное из TWO_WORD. */
+var TWO_WORD = ["ROLLS-ROYCE","ROLLS ROYCE","LAND ROVER","MERCEDES-BENZ","MERCEDES BENZ","MERCEDES-MAYBACH","MERCEDES MAYBACH","ASTON MARTIN","ALFA ROMEO","HARLEY DAVIDSON","HARLEY-DAVIDSON","MV AGUSTA"];
+var NAMES = { "BMW":"BMW", "BYD":"BYD", "KTM":"KTM", "MV-AGUSTA":"MV Agusta", "CFMOTO":"CFMoto", "QJMOTOR":"QJMotor" };
+var KEEP_WORDS = { "BOB":"Bob", "FAT":"Fat", "BOY":"Boy", "LOW":"Low", "KING":"King", "ROAD":"Road", "SLIM":"Slim", "RIDER":"Rider", "SPORT":"Sport", "STAR":"Star", "CHIEF":"Chief" };
+function brandPrefix(t){
+  var u = (t || "").trim().toUpperCase();
+  for (var i = 0; i < TWO_WORD.length; i++) { if (u.indexOf(TWO_WORD[i]) === 0) return TWO_WORD[i]; }
+  return u.split(" ")[0];
+}
+function brandKey(t){ return brandPrefix(t).replace(/ /g, "-"); }
+function brandName(k){
+  if (NAMES[k]) return NAMES[k];
+  return k.split("-").map(function(p){ return p.charAt(0) + p.slice(1).toLowerCase(); }).join("-");
+}
+function wordCase(w){
+  if (KEEP_WORDS[w]) return KEEP_WORDS[w];
+  if (/[0-9]/.test(w) || w.length < 4 || w.indexOf("-") > -1) return w;
+  return w.charAt(0) + w.slice(1).toLowerCase();
+}
+function modelName(t){
+  var tt = (t || "").trim();
+  var rest = tt.slice(brandPrefix(tt).length).trim().replace(/\b(19|20)[0-9]{2}\b/g, "").replace(/ +/g, " ").trim();
+  return rest.split(" ").map(function(w){ return wordCase(w.toUpperCase()); }).join(" ");
+}
+function groupBrands(titles){
+  var m = {}, order = [];
+  titles.forEach(function(t){
+    var k = brandKey(t); if (!k) return;
+    if (!m[k]) { m[k] = { key:k, name:brandName(k), models:[] }; order.push(k); }
+    var mn = modelName(t);
+    if (mn && m[k].models.indexOf(mn) < 0) m[k].models.push(mn);
+  });
+  return order.map(function(k){ return m[k]; }).sort(function(a, b){ return a.name.localeCompare(b.name, "en"); });
+}
+function esc(x){ return String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+function rowsHtml(groups){
+  return groups.map(function(b){
+    return '<div class="fz-gseo__row"><h4><a class="fz-gseo__brand" href="#fzgallery" data-brand="' + b.key + '">' + esc(b.name) + '</a></h4><span>' + esc(b.models.join(", ")) + '</span></div>';
+  }).join("\n");
+}
+function leadText(titles){
+  var n = titles.map(function(t){ return brandName(brandKey(t)) + " " + modelName(t); });
+  var more = n.length > 8; n = n.slice(0, 8);
+  return n.join(", ") + (more ? " и другие" : "");
+}
+
+  var STOREPARTUID = "212238831524", RECID = "4558590803";
+  async function loadTitles(){
+    var all = [], slice = 1, total = null;
+    while (slice <= 10) {
+      var r = await fetch("https://store.tildaapi.pro/api/getproductslist/?storepartuid=" + STOREPARTUID + "&recid=" + RECID + "&getparts=true&slice=" + slice + "&size=100&flag_root=withroot");
+      var j = await r.json();
+      var p = j.products || [];
+      if (total === null) total = j.total || 0;
+      p.forEach(function(x){ if (x && x.title) all.push(x.title); });
+      if (!p.length || all.length >= total) break;
+      slice++;
+    }
+    return all;
+  }
+  loadTitles().then(function(titles){
+    if (!titles.length) return;
+    var rows = document.getElementById("fzMgRows");
+    if (rows) rows.innerHTML = rowsHtml(groupBrands(titles));
+    var lead = document.getElementById("fzMgLead");
+    if (lead) lead.textContent = leadText(titles);
+  }).catch(function(){});
+})();
+</script>
