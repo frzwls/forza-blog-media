@@ -140,7 +140,7 @@
   var t=null;
   function run(){
     var cs=document.querySelectorAll(".js-store-grid-cont .js-product"); if(!cs.length) return;
-    cs.forEach(function(c){ var n=c.querySelector(".js-store-prod-name"); var x=(n?n.textContent:c.textContent); if(/BMWs+IX/i.test(x)) c.style.setProperty("display","none","important"); else c.style.removeProperty("display"); });
+    cs.forEach(function(c){ var n=c.querySelector(".js-store-prod-name"); var x=(n?n.textContent:c.textContent); if(/BMW\s+IX/i.test(x)) c.style.setProperty("display","none","important"); else c.style.removeProperty("display"); });
     if(window.t_lazyload_update) try{ t_lazyload_update(); }catch(e){}
   }
   function later(){ clearTimeout(t); t=setTimeout(run,60); }
