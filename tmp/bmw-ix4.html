@@ -1,0 +1,136 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Noto+Sans:wght@300;400;500;600&subset=cyrillic');
+.fa-section {
+  background-color:#0A0A0A;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 56px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 56px),
+    radial-gradient(ellipse 900px 700px at 100% 0%, rgba(179,51,43,0.10), transparent 60%);
+  width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;
+  padding:64px 24px 90px; box-sizing:border-box;
+}
+.fa-wrap { max-width:820px; margin:0 auto; font-family:'Noto Sans',Arial,sans-serif;
+           color:#F2F0EA; line-height:1.7; }
+.fa-meta  { font-family:'Unbounded',Arial,sans-serif; font-size:0.72rem; letter-spacing:0.12em;
+            text-transform:uppercase; color:#B3332B; margin:0 0 22px; }
+.fa-meta a{ color:#B3332B; }
+.fa-grid  { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 8px; }
+.fa-grid img { width:100%; height:340px; object-fit:contain; background:#121212;
+               border:1px solid #262626; border-radius:10px; display:block; }
+.fa-img   { width:100%; height:auto; object-fit:contain; background:#121212;
+            border:1px solid #262626; border-radius:10px; display:block; margin:28px 0 6px; }
+.fa-cap   { font-size:0.78rem; color:#707070; margin:0 0 28px; }
+.fa-h1    { font-family:'Unbounded',Arial,sans-serif; font-weight:800; font-size:2rem;
+            line-height:1.2; text-transform:uppercase; color:#F2F0EA; margin:0 0 24px; }
+.fa-hero  { width:100%; height:auto; object-fit:contain; background:#121212;
+            border:1px solid #262626; border-radius:12px; display:block; margin:0 0 28px; }
+.fa-h2    { font-family:'Unbounded',Arial,sans-serif; font-weight:700; font-size:1.25rem;
+            text-transform:uppercase; letter-spacing:0.02em; color:#F2F0EA; margin:36px 0 14px; }
+.fa-h2-f  { font-family:'Unbounded',Arial,sans-serif; font-weight:700; font-size:1.25rem;
+            text-transform:uppercase; letter-spacing:0.02em; color:#B3332B; margin:40px 0 14px; }
+.fa-p     { font-size:1rem; color:#D6D3CB; margin:0 0 16px; }
+.fa-box   { border:1px solid #262626; border-left:3px solid #B3332B; background:#161616;
+            padding:20px 24px; margin:6px 0 0; border-radius:0 10px 10px 0; }
+.fa-box p { margin:0 0 10px; color:#F2F0EA; }
+.fa-photo-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin:16px 0 8px; }
+.fa-photo-grid img { width:100%; height:180px; object-fit:cover; border:1px solid #262626;
+                      border-radius:8px; display:block; transition:transform 0.35s ease; }
+.fa-photo-grid img:hover { transform:scale(1.04); }
+.fa-slider-main { position:relative; width:100%; background:#121212; border:1px solid #262626;
+                   border-radius:10px; overflow:hidden; }
+.fa-slider-img { width:100%; height:440px; object-fit:contain; display:block; background:#121212; }
+.fa-slider-arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(10,10,10,0.65);
+                    color:#F2F0EA; border:1px solid #262626; width:40px; height:40px; border-radius:50%;
+                    font-size:1.3rem; line-height:1; cursor:pointer; display:flex; align-items:center;
+                    justify-content:center; }
+.fa-slider-prev { left:12px; } .fa-slider-next { right:12px; }
+.fa-slider-arrow:hover { background:#B3332B; border-color:#B3332B; }
+.fa-slider-counter { position:absolute; right:14px; bottom:14px; background:rgba(10,10,10,0.7);
+                      color:#F2F0EA; font-size:0.72rem; padding:4px 10px; border-radius:20px;
+                      font-family:'Unbounded',Arial,sans-serif; letter-spacing:0.06em; }
+.fa-slider-caption { font-size:0.82rem; color:#A6A6A6; margin:10px 0 12px; text-align:right; }
+.fa-slider-thumbs { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin:0 0 32px; }
+.fa-slider-thumb { width:76px; height:54px; object-fit:cover; border-radius:6px; border:1px solid #262626;
+                    cursor:pointer; opacity:0.5; transition:opacity 0.2s ease, border-color 0.2s ease;
+                    flex:0 0 auto; }
+.fa-slider-thumb.is-active { opacity:1; border-color:#B3332B; }
+@media(max-width:640px){
+  .fa-slider-img{ height:260px; }
+  .fa-slider-thumb{ width:58px; height:42px; }
+}
+.fa-also  { background:#161616; border:1px solid #262626; padding:24px 28px; border-radius:10px; margin:50px 0 0; }
+.fa-also-title { font-family:'Unbounded',Arial,sans-serif; color:#F2F0EA; font-weight:700;
+                  font-size:1rem; text-transform:uppercase; letter-spacing:0.04em; margin:0 0 16px; }
+.fa-also-list  { margin:0; padding:0; list-style:none; }
+.fa-also-item  { border-bottom:1px solid #262626; padding:10px 0; }
+.fa-also-item:last-child { border-bottom:none; }
+.fa-also-a     { color:#A6A6A6; font-size:0.92rem; text-decoration:none; transition:color 0.2s ease; }
+.fa-also-a:hover { color:#B3332B; }
+@media(max-width:640px){
+  .fa-grid{ grid-template-columns:1fr; }
+  .fa-grid img{ height:260px; }
+  .fa-photo-grid{ grid-template-columns:1fr 1fr; }
+}
+</style>
+<div class="fa-section"><div class="fa-wrap"><p class="fa-meta">2026-10-09 &nbsp;|&nbsp; Источник: <a href="https://www.caranddriver.com/news/a74056969/2027-bmw-ix4-revealed/">www.caranddriver.com</a></p><div class="fa-slider" id="fa-slider-69898">
+  <div class="fa-slider-main">
+    <button type="button" class="fa-slider-arrow fa-slider-prev" aria-label="Предыдущее фото">&#8249;</button>
+    <img class="fa-slider-img" src="https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/1.jpg" alt="2027 BMW iX4 Brings the Sloped-Roof SUV into the EV Era">
+    <button type="button" class="fa-slider-arrow fa-slider-next" aria-label="Следующее фото">&#8250;</button>
+    <div class="fa-slider-counter">1 / 3</div>
+  </div>
+  <p class="fa-slider-caption">Фото: www.caranddriver.com</p>
+  <div class="fa-slider-thumbs"><img class="fa-slider-thumb is-active" data-idx="0" src="https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/1.jpg" alt=""><img class="fa-slider-thumb" data-idx="1" src="https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/2.jpg" alt=""><img class="fa-slider-thumb" data-idx="2" src="https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/3.jpg" alt=""></div>
+</div>
+<script>
+(function(){
+  var root = document.getElementById('fa-slider-69898');
+  if (!root) return;
+  var urls = ["https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/1.jpg", "https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/2.jpg", "https://raw.githubusercontent.com/frzwls/forza-blog-media/main/assets/blog/2027-bmw-ix4-603-428/3.jpg"];
+  var caps = ["Фото: www.caranddriver.com", "Фото: www.caranddriver.com", "Фото: www.caranddriver.com"];
+  var idx = 0;
+  var img = root.querySelector('.fa-slider-img');
+  var counter = root.querySelector('.fa-slider-counter');
+  var caption = root.querySelector('.fa-slider-caption');
+  var thumbs = root.querySelectorAll('.fa-slider-thumb');
+  function show(i) {
+    idx = (i + urls.length) % urls.length;
+    img.src = urls[idx];
+    counter.textContent = (idx + 1) + ' / ' + urls.length;
+    caption.textContent = caps[idx];
+    thumbs.forEach(function(t, j){ t.classList.toggle('is-active', j === idx); });
+  }
+  root.querySelector('.fa-slider-prev').addEventListener('click', function(){ show(idx - 1); });
+  root.querySelector('.fa-slider-next').addEventListener('click', function(){ show(idx + 1); });
+  thumbs.forEach(function(t){ t.addEventListener('click', function(){ show(parseInt(t.dataset.idx, 10)); }); });
+})();
+</script>
+<h1 class="fa-h1">BMW iX4 2027: электрический «купе-SUV» на 604 л.с. и запасом хода до 827 км</h1><p class="fa-p">BMW официально представил iX4 2027 модельного года — электрический преемник снятого с производства X4 с покатой линией крыши. Это новая модель семейства Neue Klasse: спереди она практически повторяет iX3, а от стойки B и дальше получила характерную для «спортивных купе-SUV» BMW линию крыши. Выпускать её будут на том же заводе в Дебрецене (Венгрия), что и iX3. В США продажи стартуют в марте 2027 года.</p><h2 class="fa-h2">Версии и мощность</h2><p class="fa-p">Для США и Европы заявлены разные версии, но базовая логика одна: полный привод xDrive с мотором на каждой оси.</p><p class="fa-p">— iX4 50 xDrive: около 463 л.с. и 644 Н·м, разгон до 97 км/ч за 4,7 с, ограничение скорости 209 км/ч. Батарея около 112–113 кВт·ч.</p><p class="fa-p">— iX4 M60 xDrive: 603–604 л.с. и 875 Н·м, разгон до 100 км/ч за 3,9 с, ограничение скорости 240 км/ч. Батарея та же. В США он приедет позже, чем 50 xDrive. Окончательное время разгона 0–97 км/ч BMW ещё не назвал.</p><p class="fa-p">— iX4 xDrive (для Европы): батарея 87 кВт·ч, 369 л.с. и 520 Н·м, до 100 км/ч за 5,6 с, запас хода до 637 км по WLTP.</p><h2 class="fa-h2">Запас хода и зарядка</h2><p class="fa-p">У 50 xDrive заявлено до 827 км по европейскому циклу WLTP и до 689 км по американскому EPA. У M60 запас хода по WLTP — 777 км. Архитектура на 800 В допускает зарядку мощностью до 400 кВт: за 10 минут можно добавить до 386 км запаса хода по WLTP (около 296 км по EPA), а зарядка с 10 до 80 % занимает около 21 минуты. У базовой версии на 87 кВт·ч максимальная мощность зарядки 300 кВт, за 10 минут она добавляет около 301 км.</p><h2 class="fa-h2">Дизайн и салон</h2><p class="fa-p">Силуэт iX4 BMW описывает как компромисс между спортивной посадкой и солидным видом: покатая крыша, длинная колёсная база и короткие свесы. Салон, как у остальных Neue Klasse, — тот же 17,9-дюймовый центральный экран и 43-дюймовый дисплей на лобовом стекле Panoramic iDrive; 3D-проекция на стекло — опция. У M60 есть отдельный спортивный руль M Sport с красной меткой на 12 часов, цветной строчкой, подрулевыми лепестками и кнопками режимов Boost и M Mode.</p><p class="fa-p">Из-за покатой крыши багажник стал меньше, чем у iX3: 490 л за задними сиденьями (на 30 л меньше) и около 1600 л со сложенными сиденьями (на 150 л меньше). По словам BMW, компактная конструкция батареи cell-to-pack сохраняет запас по высоте над головой задних пассажиров.</p><h2 class="fa-h2">Цена и сроки</h2><p class="fa-p">В США iX4 50 xDrive стоит от $67 695, это на $4845 дороже аналогичного iX3, а старт продаж назначен на март 2027 года. Цену M60 пока не назвали. Информации о продажах и цене в Казахстане в источниках нет.</p><h2 class="fa-h2-f">Кованые диски FORZA для BMW iX4</h2><div class="fa-box"><p class="fa-p">BMW iX4 — тяжёлый электрический кроссовер с мощной силовой установкой, и для него особенно важны жёсткость диска и точный фитмент. FORZA изготавливает кованые диски под конкретную модель и подбирает размер и вылет под ваш автомобиль. Подписывайтесь в Instagram @forza_wheels или пишите нам, чтобы обсудить подбор комплекта.</p></div>
+<div class="fa-also" id="fa-also-block">
+<p class="fa-also-title">Читайте также</p>
+<ul class="fa-also-list" id="fa-also-list"></ul>
+</div>
+<script>
+(function(){
+  var REGISTRY='https://raw.githubusercontent.com/frzwls/forza-blog-media/main/blog-registry.json';
+  var currentUrl=window.location.href;
+  fetch(REGISTRY+'?t='+Date.now())
+    .then(function(r){return r.json();})
+    .then(function(articles){
+      var filtered=articles.filter(function(a){
+        return a.tilda_url && currentUrl.indexOf(a.tilda_url)===-1;
+      });
+      var shuffled=filtered.sort(function(){return Math.random()-0.5;});
+      var pick=shuffled.slice(0,Math.min(3,shuffled.length));
+      var list=document.getElementById('fa-also-list');
+      if(!list||pick.length===0){document.getElementById('fa-also-block').style.display='none';return;}
+      pick.forEach(function(a){
+        var li=document.createElement('li');
+        li.className='fa-also-item';
+        li.innerHTML='<a class="fa-also-a" href="'+a.tilda_url+'">'+a.title+'</a>';
+        list.appendChild(li);
+      });
+    })
+    .catch(function(){document.getElementById('fa-also-block').style.display='none';});
+})();
+</script></div></div>
