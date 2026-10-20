@@ -1,0 +1,224 @@
+<style>
+/* FZ-PODBORKI: подборки дисков под модель авто (данные: forza-blog-media/data/podborki.json) */
+.fzpb{--bg:#131313;--line:#2b2b2b;--text:#f4f2ef;--dim:#9b9793;--accent:#b3332b;position:relative;width:100vw;margin-left:calc(-50vw + 50%);background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;padding:80px 0 70px;box-sizing:border-box}
+.fzpb *{box-sizing:border-box}
+.fzpb[hidden]{display:none}
+.fzpb__head{width:min(1200px,calc(100% - 48px));margin:0 auto 34px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.fzpb__eyebrow{display:flex;align-items:center;gap:12px;color:var(--accent);font:700 11px Inter,Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px}
+.fzpb__eyebrow:before{content:"";width:26px;height:1px;background:var(--accent)}
+.fzpb__title{font:800 40px/1.1 Inter,Arial,sans-serif;letter-spacing:-.02em;margin:0;color:var(--text)}
+.fzpb__sub{margin:12px 0 0;color:var(--dim);font-size:15px;max-width:600px;line-height:1.5}
+.fzpb__ctrl{display:flex;gap:10px}
+.fzpb__arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-size:18px;transition:.2s}
+.fzpb__arrow:hover{background:var(--accent);border-color:var(--accent)}
+.fzpb__track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 24px 6px;scrollbar-width:none;scroll-behavior:smooth;scroll-padding:0 24px}
+.fzpb__track::-webkit-scrollbar{display:none}
+.fzpb__track{cursor:grab}
+.fzpb__track.drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+.fzpb__card{flex:0 0 400px;height:500px;border-radius:20px;overflow:hidden;position:relative;scroll-snap-align:start;cursor:pointer;background:#1c1c1c;border:0;padding:0;text-align:left;color:inherit}
+.fzpb__card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.fzpb__card:hover img{transform:scale(1.05)}
+.fzpb__card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,0) 45%,rgba(0,0,0,.35))}
+.fzpb__ct{position:absolute;z-index:2;left:22px;right:22px;top:20px}
+.fzpb__ct b{display:block;font:700 22px/1.15 Inter,Arial,sans-serif;letter-spacing:-.01em}
+.fzpb__ct span{display:block;margin-top:6px;font:500 14px Inter,Arial,sans-serif;color:rgba(255,255,255,.82)}
+.fzpb__cz{position:absolute;z-index:2;left:22px;bottom:20px;padding:8px 14px;border-radius:30px;background:rgba(10,10,10,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.12);font:600 12px Inter,Arial,sans-serif;letter-spacing:.04em}
+.fzpb__go{position:absolute;z-index:2;right:20px;bottom:18px;width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:16px;opacity:0;transform:translateY(6px);transition:.25s}
+.fzpb__card:hover .fzpb__go{opacity:1;transform:none}
+.fzpb__more{width:min(1200px,calc(100% - 48px));margin:32px auto 0}
+.fzpb__more a{display:inline-block;padding:15px 30px;border:1px solid var(--line);border-radius:10px;color:var(--text);text-decoration:none;font:700 12px Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;transition:.2s}
+.fzpb__more a:hover{border-color:var(--accent);background:rgba(179,51,43,.12)}
+.fzpb-lb{position:fixed;inset:0;z-index:99990;background:rgba(5,5,5,.92);display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;font-family:Inter,Arial,sans-serif;color:#f4f2ef}
+.fzpb-lb.on{display:flex}
+.fzpb-lb *{box-sizing:border-box}
+.fzpb-lb__box{position:relative;margin:auto;width:min(1080px,100%);display:grid;grid-template-columns:1.4fr 1fr;background:#0e0e0e;border:1px solid #222;border-radius:20px;overflow:hidden}
+.fzpb-lb__img{position:relative;background:#000;min-height:380px}
+.fzpb-lb__img img{width:100%;height:100%;object-fit:cover;display:block;max-height:62vh}
+.fzpb-lb__a{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:18px}
+.fzpb-lb__a.p{left:14px}.fzpb-lb__a.n{right:14px}
+.fzpb-lb__cnt{position:absolute;left:14px;bottom:14px;padding:6px 12px;border-radius:20px;background:rgba(0,0,0,.65);font:600 12px Inter,Arial,sans-serif}
+.fzpb-lb__side{padding:26px;display:flex;flex-direction:column;gap:14px}
+.fzpb-lb__side h4{font:800 26px/1.15 Inter,Arial,sans-serif;margin:0;color:#f4f2ef}
+.fzpb-lb__meta{color:#9b9793;font-size:14px}
+.fzpb-lb__chips{display:flex;gap:8px;flex-wrap:wrap}
+.fzpb-lb__chips span{padding:7px 12px;border:1px solid #2b2b2b;border-radius:30px;font:600 12px Inter,Arial,sans-serif}
+.fzpb-lb__thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.fzpb-lb__thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;opacity:.55;cursor:pointer;border:2px solid transparent}
+.fzpb-lb__thumbs img.on{opacity:1;border-color:#b3332b}
+.fzpb-lb__btn{margin-top:auto;display:block;text-align:center;padding:16px;border-radius:10px;background:#b3332b;color:#fff;text-decoration:none;font:700 12px Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.fzpb-lb__btn.g{background:transparent;border:1px solid #2b2b2b;margin-top:0}
+.fzpb-lb__x{position:absolute;top:14px;right:14px;z-index:3;width:42px;height:42px;border-radius:50%;border:0;background:#1c1c1c;color:#fff;font-size:18px;cursor:pointer}
+.fzpb-lb__wheels{grid-column:1/-1;padding:28px 28px 34px;border-top:1px solid #222;background:#0b0b0b}
+.fzpb-lb__wh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:18px}
+.fzpb-lb__wh h5{font:800 24px Inter,Arial,sans-serif;margin:0;color:#f4f2ef}.fzpb-lb__wh span{color:#9b9793;font-size:14px}
+.fzpb-lb__gt{display:flex;align-items:center;gap:12px;margin:26px 0 14px;font:800 16px Inter,Arial,sans-serif;letter-spacing:.02em}
+.fzpb-lb__gt:first-child{margin-top:0}
+.fzpb-lb__gt:before{content:"";width:3px;height:18px;background:#b3332b;border-radius:2px}
+.fzpb-lb__gt span{padding:3px 10px;border-radius:20px;background:#1c1c1c;border:1px solid #2b2b2b;font:700 12px Inter,Arial,sans-serif;color:#9b9793}
+.fzpb-lb__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fzpb-lb__wc{display:block;text-decoration:none;color:#f4f2ef;background:#141414;border:1px solid #222;border-radius:14px;overflow:hidden;transition:.2s}
+.fzpb-lb__wc:hover{border-color:#b3332b;transform:translateY(-3px)}
+.fzpb-lb__wc img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#1a1a1a}
+.fzpb-lb__wc div{padding:12px 14px 14px}
+.fzpb-lb__wc b{display:block;font:700 13px/1.3 Inter,Arial,sans-serif}
+.fzpb-lb__wc i{display:block;margin-top:6px;font:600 11px Inter,Arial,sans-serif;color:#b3332b;font-style:normal;letter-spacing:.08em;text-transform:uppercase}
+.fzpb-lb__all{display:inline-block;margin-top:16px;padding:12px 22px;border:1px solid #2b2b2b;border-radius:10px;color:#f4f2ef;text-decoration:none;font:700 12px Inter,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.fzpb-lb__all:hover{border-color:#b3332b}
+@media(max-width:1100px){.fzpb__card{flex-basis:360px;height:460px}}
+@media(max-width:900px){.fzpb-lb__grid{grid-template-columns:repeat(2,1fr)}.fzpb-lb__box{grid-template-columns:1fr}}
+@media(max-width:760px){.fzpb{padding:56px 0 48px}.fzpb__title{font-size:28px}.fzpb__ctrl{display:none}.fzpb__card{flex-basis:78%;height:400px}.fzpb-lb{padding:12px}.fzpb-lb__img{min-height:240px}.fzpb-lb__img img{max-height:44vh}.fzpb-lb__wheels{padding:22px 16px 26px}}
+
+.fzpb-lb__side h4{padding-right:56px}
+.fzpb-lb__sz{font:600 13px/1.5 Inter,Arial,sans-serif;color:#d8d5d0}
+.fzpb-lb__wc{font:inherit;text-align:left;cursor:pointer;padding:0;width:100%}
+.fzpb-wd{position:fixed;inset:0;z-index:99995;background:rgba(5,5,5,.94);display:none;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;font-family:Inter,Arial,sans-serif;color:#f4f2ef}
+.fzpb-wd.on{display:flex}
+.fzpb-wd *{box-sizing:border-box}
+.fzpb-wd__box{position:relative;margin:auto;width:min(980px,100%);display:grid;grid-template-columns:1.3fr 1fr;background:#0e0e0e;border:1px solid #222;border-radius:20px;overflow:hidden}
+.fzpb-wd__img{position:relative;background:#1a1a1a;min-height:420px}
+.fzpb-wd__img img{width:100%;height:100%;object-fit:cover;display:block;max-height:70vh}
+.fzpb-wd__side{padding:28px 26px;display:flex;flex-direction:column;gap:14px}
+.fzpb-wd__tag{align-self:flex-start;padding:6px 12px;border-radius:20px;background:rgba(179,51,43,.15);border:1px solid rgba(179,51,43,.4);color:#e0645c;font:700 11px Inter,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.fzpb-wd__side h4{font:800 24px/1.2 Inter,Arial,sans-serif;margin:0;padding-right:50px;color:#f4f2ef}
+.fzpb-wd__car{color:#9b9793;font-size:14px}
+.fzpb-wd__thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.fzpb-wd__thumbs img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;opacity:.55;cursor:pointer;border:2px solid transparent}
+.fzpb-wd__thumbs img.on{opacity:1;border-color:#b3332b}
+.fzpb-wd__btn{display:block;text-align:center;padding:16px;border-radius:10px;background:#b3332b;color:#fff;text-decoration:none;font:700 12px Inter,Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;border:0;cursor:pointer;width:100%}
+.fzpb-wd__btn.g{background:transparent;border:1px solid #2b2b2b;color:#f4f2ef}
+.fzpb-wd__btns{margin-top:auto;display:flex;flex-direction:column;gap:10px}
+.fzpb-wd__x{position:absolute;top:14px;right:14px;z-index:3;width:42px;height:42px;border-radius:50%;border:0;background:#1c1c1c;color:#fff;font-size:18px;cursor:pointer}
+@media(max-width:900px){.fzpb-wd__box{grid-template-columns:1fr}.fzpb-wd__img{min-height:260px}.fzpb-wd__img img{max-height:46vh}}
+@media(max-width:760px){.fzpb-wd{padding:12px}}
+
+/* --- каталог: секция встаёт над сеткой, выравнивается по ней и уходит за правый край --- */
+.fzpb{width:auto;margin-left:0;background:transparent;padding:34px 0 38px;overflow:hidden}
+.fzpb__head{width:auto;margin:0 0 24px}
+.fzpb__title{font-size:32px}
+.fzpb__sub{max-width:640px}
+.fzpb__track{padding:0 24px 6px 0;scroll-padding:0}
+.fzpb__card{flex-basis:360px;height:460px}
+.fzpb__more{display:none}
+.fzpb-lb{z-index:100010}.fzpb-wd{z-index:100020}
+@media(min-width:901px){.fzpb{padding:0 0 26px;margin-top:-6px}.fzpb__eyebrow,.fzpb__sub{display:none}.fzpb__title{font-size:22px;letter-spacing:-.01em}.fzpb__head{margin:0 0 14px}.fzpb__arrow{width:38px;height:38px;font-size:15px}.fzpb__track{gap:16px}.fzpb__card{flex-basis:270px;height:340px;border-radius:16px}.fzpb__ct{left:16px;right:16px;top:14px}.fzpb__ct b{font-size:17px}.fzpb__ct span{font-size:12px;margin-top:4px}.fzpb__cz{left:14px;bottom:14px;padding:6px 11px;font-size:11px}}
+@media(max-width:900px){.fzpb{padding:6px 0 20px}.fzpb__eyebrow,.fzpb__sub{display:none}.fzpb__title{font-size:20px}.fzpb__head{margin-bottom:12px}.fzpb__card{flex-basis:70%;height:320px}}
+@media(max-width:900px){.fzpb__head{padding:0 16px}.fzpb__track{padding:0 16px 6px}.fzpb__card{flex-basis:78%;height:400px}.fzpb__title{font-size:26px}}
+</style>
+<section class="fzpb" id="fzpb" hidden>
+  <div class="fzpb__head">
+    <div>
+      <div class="fzpb__eyebrow">Подборки по моделям</div>
+      <h2 class="fzpb__title" id="fzpbTt">Подборки дисков</h2>
+      <p class="fzpb__sub">Наши проекты на вашей марке и дизайны дисков, которые подходят именно вашей модели. Выберите машину - откроется подборка.</p>
+    </div>
+    <div class="fzpb__ctrl"><button class="fzpb__arrow" id="fzpbP" aria-label="Назад">←</button><button class="fzpb__arrow" id="fzpbN" aria-label="Вперёд">→</button></div>
+  </div>
+  <div class="fzpb__track" id="fzpbT"></div>
+</section>
+<div class="fzpb-lb" id="fzpbLb"><div class="fzpb-lb__box"><button class="fzpb-lb__x" id="fzpbX" aria-label="Закрыть">✕</button>
+  <div class="fzpb-lb__img"><img id="fzpbI" alt=""><button class="fzpb-lb__a p" id="fzpbLP">←</button><button class="fzpb-lb__a n" id="fzpbLN">→</button><div class="fzpb-lb__cnt" id="fzpbC"></div></div>
+  <div class="fzpb-lb__side"><h4 id="fzpbH"></h4><div class="fzpb-lb__meta" id="fzpbM"></div><div class="fzpb-lb__sz" id="fzpbSz"></div><div class="fzpb-lb__chips" id="fzpbCh"></div><div class="fzpb-lb__thumbs" id="fzpbTh"></div>
+    <a class="fzpb-lb__btn" href="/wheel-configurator">Подобрать под мою машину</a><a class="fzpb-lb__btn g" href="/cars-gallery">Все наши проекты →</a></div>
+  <div class="fzpb-lb__wheels"><div class="fzpb-lb__wh"><h5 id="fzpbWT"></h5><span id="fzpbWN"></span></div><div id="fzpbW"></div></div></div></div>
+<div class="fzpb-wd" id="fzpbWd"><div class="fzpb-wd__box"><button class="fzpb-wd__x" id="fzpbWdX" aria-label="Закрыть">✕</button>
+  <div class="fzpb-wd__img"><img id="fzpbWdI" alt=""><button class="fzpb-lb__a p" id="fzpbWdP">←</button><button class="fzpb-lb__a n" id="fzpbWdN">→</button><div class="fzpb-lb__cnt" id="fzpbWdC"></div></div>
+  <div class="fzpb-wd__side"><span class="fzpb-wd__tag" id="fzpbWdT"></span><h4 id="fzpbWdH"></h4><div class="fzpb-wd__car" id="fzpbWdCar"></div><div class="fzpb-lb__sz" id="fzpbWdSz"></div><div class="fzpb-wd__thumbs" id="fzpbWdTh"></div>
+    <div class="fzpb-wd__btns"><a class="fzpb-wd__btn" id="fzpbWdWa" href="#" target="_blank" rel="noopener">Заказать такие диски в WhatsApp</a><a class="fzpb-wd__btn g" href="/wheel-configurator">Подобрать под мою машину</a><button class="fzpb-wd__btn g" id="fzpbWdBack" type="button">← К подборке</button></div></div></div></div>
+<script>
+(function(){
+  var DATA_BASE='https://raw.githubusercontent.com/frzwls/forza-blog-media/main/data/podborki-';
+  var SLUG={'BMW':'bmw','MERCEDES-BENZ':'mercedes','PORSCHE':'porsche','LAND ROVER':'land-rover','AUDI':'audi','LEXUS':'lexus'};
+  var $=function(id){return document.getElementById(id)};
+  var sec=$('fzpb'),tr=$('fzpbT'),lb=$('fzpbLb');
+  if(!sec||!tr||!lb) return;
+  // окно держим в body, чтобы оно не зависело от обёрток Tilda
+  document.body.appendChild(lb);
+  var C=[],cur=0,k=0;
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function plural(n){var a=n%10,b=n%100;if(a===1&&b!==11)return 'дизайн';if(a>=2&&a<=4&&(b<10||b>=20))return 'дизайна';return 'дизайнов'}
+  function build(){
+    tr.innerHTML='';tr.scrollLeft=0;
+    C.forEach(function(c,i){
+      var b=document.createElement('button');b.type='button';b.className='fzpb__card';
+      b.innerHTML='<img src="'+esc(c.thumb)+'" alt="'+esc(c.t)+'" loading="lazy"><span class="fzpb__ct"><b>'+esc(c.t)+'</b><span>'+esc(c.s)+'</span></span><span class="fzpb__cz">Подборка · '+c.n+' '+plural(c.n)+'</span><span class="fzpb__go">→</span>';
+      b.onclick=function(){openCar(i)};tr.appendChild(b);
+    });
+  }
+  function show(){
+    var c=C[cur];$('fzpbI').src=c.imgs[k];$('fzpbC').textContent=(k+1)+' / '+c.imgs.length;
+    [].forEach.call($('fzpbTh').children,function(x,j){x.className=j===k?'on':''});
+  }
+  function allLink(name){return name.indexOf('Заводские')===0?'/oem':(name.indexOf('Магниевые')===0?'/magnesium':'/catalog')}
+  function openCar(i){
+    cur=i;k=0;var c=C[i];
+    $('fzpbH').textContent=c.t;$('fzpbM').textContent=c.s;
+    $('fzpbCh').innerHTML='<span>Подборка: '+c.n+' '+plural(c.n)+'</span><span>Любой размер и цвет</span><span>Пожизненная гарантия</span>';
+    var th=$('fzpbTh');th.innerHTML='';
+    c.imgs.forEach(function(u,j){var im=document.createElement('img');im.src=u.replace('/resize/1200x/','/resize/200x/');im.alt='';im.onclick=function(){k=j;show()};th.appendChild(im)});
+    $('fzpbSz').textContent=c.sz?('Размеры колёс на проекте: '+c.sz):'';
+    $('fzpbWT').textContent='Подборка дисков: '+c.t;$('fzpbWN').textContent='Дизайнов в подборке: '+c.n;
+    var w=$('fzpbW');w.innerHTML='';
+    c.g.forEach(function(g,gi){
+      var h=document.createElement('div');h.className='fzpb-lb__gt';h.innerHTML=esc(g.n)+'<span>'+g.tot+'</span>';w.appendChild(h);
+      var gr=document.createElement('div');gr.className='fzpb-lb__grid';
+      g.x.forEach(function(x,xi){var a=document.createElement('button');a.type='button';a.className='fzpb-lb__wc';a.onclick=function(){openWheel(gi,xi)};a.innerHTML='<img loading="lazy" src="'+esc(x.i)+'" alt=""><div><b>'+esc(x.l)+'</b><i>'+esc(x.z)+'</i></div>';gr.appendChild(a)});
+      w.appendChild(gr);
+      if(g.tot>g.x.length){var m=document.createElement('a');m.className='fzpb-lb__all';m.textContent='Смотреть все '+g.tot+' →';if(g.n.indexOf('Подходящие')===0){m.href='#';m.onclick=function(e){e.preventDefault();close();var gc=document.querySelector('.js-store-grid-cont');if(gc)window.scrollTo({top:gc.getBoundingClientRect().top+scrollY-90,behavior:'smooth'})}}else{m.href=allLink(g.n)}w.appendChild(m)}
+    });
+    lb.classList.add('on');lb.scrollTop=0;document.documentElement.style.overflow='hidden';show();
+  }
+  var wcur=null,wk=0;
+  function wshow(){var x=wcur.x,ph=x.p&&x.p.length?x.p:[x.i];$('fzpbWdI').src=ph[wk];$('fzpbWdC').textContent=(wk+1)+' / '+ph.length;[].forEach.call($('fzpbWdTh').children,function(t,j){t.className=j===wk?'on':''})}
+  function openWheel(gi,xi){
+    var c=C[cur],x=c.g[gi].x[xi];wcur={x:x,c:c};wk=0;var ph=x.p&&x.p.length?x.p:[x.i];
+    $('fzpbWdT').textContent=x.z;$('fzpbWdH').textContent=x.l;$('fzpbWdCar').textContent='Подборка для '+c.t;
+    $('fzpbWdSz').textContent=x.s?x.s:(x.z.indexOf('Магние')===0?'Диаметр R17-R24, ширина от 8 до 13.5 J':'Размеры под ваш автомобиль - подберём любые');
+    var th=$('fzpbWdTh');th.innerHTML='';ph.forEach(function(u,j){var im=document.createElement('img');im.src=u.replace('/resize/900x/','/resize/200x/');im.alt='';im.onclick=function(){wk=j;wshow()};th.appendChild(im)});
+    th.style.display=ph.length>1?'grid':'none';$('fzpbWdP').style.display=$('fzpbWdN').style.display=ph.length>1?'':'none';
+    $('fzpbWdWa').href='https://wa.me/77019402422?text='+encodeURIComponent('Здравствуйте! Хочу диски: '+x.l+' ('+x.z+') для '+c.t+'. Подскажите стоимость и сроки.');
+    var wd=$('fzpbWd');document.body.appendChild(wd);wd.classList.add('on');wd.scrollTop=0;wshow();
+  }
+  function closeWheel(){$('fzpbWd').classList.remove('on')}
+  $('fzpbWdX').onclick=closeWheel;$('fzpbWdBack').onclick=closeWheel;$('fzpbWd').onclick=function(e){if(e.target===$('fzpbWd'))closeWheel()};
+  $('fzpbWdN').onclick=function(){var n=(wcur.x.p||[wcur.x.i]).length;wk=(wk+1)%n;wshow()};
+  $('fzpbWdP').onclick=function(){var n=(wcur.x.p||[wcur.x.i]).length;wk=(wk-1+n)%n;wshow()};
+  function close(){lb.classList.remove('on');document.documentElement.style.overflow=''}
+  $('fzpbX').onclick=close;lb.onclick=function(e){if(e.target===lb)close()};
+  $('fzpbLN').onclick=function(){k=(k+1)%C[cur].imgs.length;show()};
+  $('fzpbLP').onclick=function(){k=(k-1+C[cur].imgs.length)%C[cur].imgs.length;show()};
+  $('fzpbN').onclick=function(){tr.scrollBy({left:424})};$('fzpbP').onclick=function(){tr.scrollBy({left:-424})};
+  // перетаскивание ленты мышью (на тач-экранах работает родная прокрутка)
+  var dn=0,mv=false,sx=0,sl=0;
+  tr.addEventListener('mousedown',function(e){if(e.button!==0)return;dn=1;mv=false;sx=e.pageX;sl=tr.scrollLeft});
+  window.addEventListener('mousemove',function(e){if(!dn)return;var dx=e.pageX-sx;if(!mv&&Math.abs(dx)>5){mv=true;tr.classList.add('drag')}if(mv){e.preventDefault();tr.scrollLeft=sl-dx}});
+  window.addEventListener('mouseup',function(){if(!dn)return;dn=0;tr.classList.remove('drag')});
+  tr.addEventListener('click',function(e){if(mv){e.preventDefault();e.stopPropagation();mv=false}},true);
+  tr.addEventListener('dragstart',function(e){e.preventDefault()});
+  document.addEventListener('keydown',function(e){if($('fzpbWd').classList.contains('on')){if(e.key==='Escape')closeWheel();if(e.key==='ArrowRight')$('fzpbWdN').click();if(e.key==='ArrowLeft')$('fzpbWdP').click();return}if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')$('fzpbLN').click();if(e.key==='ArrowLeft')$('fzpbLP').click()});
+  // показываем подборки, когда в фильтре «Марка автомобиля» выбрана ровно одна марка, для которой есть данные
+  var cache={},curBrand='',shown='';
+  function place(){
+    var g=document.querySelector('.js-store-grid-cont');if(!g||sec.hidden)return;
+    var p=g.parentElement;if(sec.parentElement!==p||sec.nextElementSibling!==g)p.insertBefore(sec,g);
+    var pr=p.getBoundingClientRect(),gr=g.getBoundingClientRect(),vw=document.documentElement.clientWidth;
+    var off=vw>900?20:0;sec.style.marginLeft=Math.max(0,gr.left-pr.left+off)+'px';sec.style.width=Math.max(300,vw-gr.left-off)+'px';
+    $('fzpbT').previousElementSibling.style.maxWidth=Math.min(gr.width-2*off,vw-gr.left-off)+'px';
+  }
+  function apply(b,cars){C=cars;build();$('fzpbTt').textContent='Подборки дисков для '+b;sec.hidden=false;shown=b;place()}
+  function load(b){
+    var sl=SLUG[b.toUpperCase()];
+    if(cache[sl]){apply(b,cache[sl]);return}
+    var t=Math.floor(Date.now()/3600000);
+    fetch(DATA_BASE+sl+'.json?t='+t).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(d){cache[sl]=(d&&d.cars)||[];if(cache[sl].length&&curBrand===b)apply(b,cache[sl])}).catch(function(){})
+  }
+  function sync(){
+    var el=document.querySelectorAll('#fzCarList .fz-cfopt.is-checked');
+    var b=(el.length===1&&SLUG[(el[0].getAttribute('data-car')||'').toUpperCase()])?el[0].getAttribute('data-car'):'';
+    if(b===curBrand){if(b&&shown===b)place();return}
+    curBrand=b;
+    if(!b){sec.hidden=true;shown='';return}
+    load(b);
+  }
+  setInterval(sync,400);window.addEventListener('resize',place);
+})();
+</script>
