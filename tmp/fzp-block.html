@@ -1,0 +1,121 @@
+<!-- FZP-START: новое оформление описания проектов и карточек каталога (шаблон «премиум-класса для …», память проекта §179). Откат: удалить блок от FZP-START до FZP-END -->
+<script>
+(function(){
+  if (window.__fzProjDescr) return; window.__fzProjDescr = true;
+  var KEY = 'Преимущества кованых дисков от Forza Wheels';
+  var BRAND_GATE = 'премиум качества любого дизайна';
+  var CSS = [
+    '.fzp-descr{ font-family:"Noto Sans",Arial,sans-serif; color:#aeaeae; }',
+    '.fzp-descr .fzp-intro{ font-size:17.5px; line-height:1.6; color:#aeaeae; margin:0 0 4px; }',
+    '.fzp-descr .fzp-intro b{ color:#F2F0EA; font-weight:600; }',
+    '.fzp-descr .fzp-section{ margin-top:22px; padding-top:20px; border-top:1px solid #262626; }',
+    '.fzp-descr .fzp-section:first-of-type{ margin-top:16px; padding-top:0; border-top:none; }',
+    '.fzp-descr .fzp-head{ font-size:13.5px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#6b6b6b; margin:0 0 13px; }',
+    '.fzp-descr .fzp-diams{ display:flex; flex-wrap:wrap; gap:5px; }',
+    '.fzp-descr .fzp-diam{ display:inline-flex; align-items:center; justify-content:center; min-width:44px; height:30px; padding:0 8px; border:1px solid #262626; border-radius:7px; background:#1c1c1c; color:#aeaeae; font-size:12.5px; font-weight:600; }',
+    '.fzp-descr .fzp-specs{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 24px; }',
+    '.fzp-descr .fzp-spec-label{ font-size:11px; text-transform:uppercase; letter-spacing:1px; color:#6b6b6b; margin-bottom:4px; }',
+    '.fzp-descr .fzp-spec-value{ font-size:15px; font-weight:600; color:#F2F0EA; line-height:1.4; }',
+    '.fzp-descr .fzp-list{ display:flex; flex-direction:column; gap:9px; }',
+    '.fzp-descr .fzp-item{ display:flex; align-items:flex-start; gap:8px; font-size:14.5px; line-height:1.5; color:#aeaeae; }',
+    '.fzp-descr .fzp-item svg{ width:14px; height:14px; flex:none; margin-top:3px; stroke:#B3332B; fill:none; stroke-width:2.2; }',
+    '.fzp-descr .fzp-steps{ display:flex; flex-direction:column; }',
+    '.fzp-descr .fzp-step{ display:flex; gap:12px; padding-bottom:14px; position:relative; }',
+    '.fzp-descr .fzp-step:not(:last-child)::before{ content:""; position:absolute; left:10px; top:24px; bottom:0; width:1px; background:#262626; }',
+    '.fzp-descr .fzp-step-num{ width:23px; height:23px; border-radius:50%; border:1px solid #262626; background:#1c1c1c; color:#aeaeae; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex:none; }',
+    '.fzp-descr .fzp-step p{ margin:0; font-size:14.5px; line-height:1.5; color:#aeaeae; padding-top:2px; }',
+    '.fzp-descr .fzp-callout{ display:flex; align-items:center; gap:12px; background:rgba(179,51,43,0.12); border:1px solid rgba(179,51,43,0.35); border-left:3px solid #B3332B; border-radius:10px; padding:12px 16px; }',
+    '.fzp-descr .fzp-callout svg{ width:20px; height:20px; flex:none; stroke:#B3332B; fill:none; stroke-width:1.8; }',
+    '.fzp-descr .fzp-callout-text{ font-size:15px; color:#F2F0EA; }',
+    '.fzp-descr .fzp-callout-text b{ color:#fff; font-weight:700; }',
+    '.fzp-card{ padding:20px; border:1px solid #262626; border-radius:16px; background:#141414; }',
+  ,
+    '.fzp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; margin-top:140px; }',
+    '@media(max-width:900px){ .fzp-grid{ grid-template-columns:1fr; margin-top:48px; } .fzp-descr .fzp-specs{ grid-template-columns:1fr; } }'
+  ].join('\n');
+  var CHECK = '<svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>';
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function item(t){ return '<div class="fzp-item">' + CHECK + '<span>' + esc(t) + '</span></div>'; }
+  function step(n, t){ return '<div class="fzp-step"><div class="fzp-step-num">' + n + '</div><p>' + esc(t) + '</p></div>'; }
+  function clean(s){ return String(s).replace(/\s+/g, ' ').trim(); }
+  function parse(raw){
+    var d = document.createElement('div'); d.innerHTML = raw;
+    var r = { model:'', sizes:[], bullets:[], benefits:[], process:[], how:[], pay:'', phone:'' };
+    var m = d.querySelector('strong, b'); if (m) r.model = clean(m.textContent);
+    var text = d.innerHTML.replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div)>/gi, '\n');
+    var tmp = document.createElement('div'); tmp.innerHTML = text;
+    var lines = (tmp.textContent || '').split('\n').map(clean).filter(Boolean);
+    lines.forEach(function(l){
+      var s = l.match(/^(Передние|Задние)\s*:\s*(.+)$/i);
+      if (s) r.sizes.push({ label:s[1], value:s[2] });
+      var p = l.match(/^Оплата\s*:\s*(.+)$/i); if (p) r.pay = p[1];
+      var ph = l.match(/(\+?\d[\d\s()\-]{8,}\d)/); if (ph && /Свяжитесь|Есть вопросы/i.test(lines.join(' '))) r.phone = r.phone || '';
+    });
+    var uls = d.querySelectorAll('ul');
+    for (var i = 0; i < uls.length; i++){
+      var head = '', prev = uls[i].previousSibling, guard = 0;
+      while (prev && guard++ < 6){ var tx = clean(prev.textContent || ''); if (tx && prev.nodeName !== 'BR') { head = tx; break; } prev = prev.previousSibling; }
+      var items = [].map.call(uls[i].querySelectorAll('li'), function(li){ return clean(li.textContent); }).filter(Boolean);
+      if (/^Преимущества/i.test(head)) r.benefits = items;
+      else if (/^Процесс заказа/i.test(head)) r.process = items;
+      else if (/^Как мы работаем/i.test(head)) r.how = items;
+      else if (!r.bullets.length) r.bullets = items;
+    }
+    return r;
+  }
+  function buildTop(p){
+    var h = '<p class="fzp-intro">Мы производим кованые диски премиум-класса' + (p.model ? ' для <b>' + esc(p.model) + '</b>' : '') + ' любого дизайна, размера и цвета.</p>';
+    if (p.sizes.length) h += '<div class="fzp-section"><p class="fzp-head">Размеры колёс</p><div class="fzp-specs">' + p.sizes.map(function(s){ return '<div><div class="fzp-spec-label">' + esc(s.label) + '</div><div class="fzp-spec-value">' + esc(s.value) + '</div></div>'; }).join('') + '</div></div>';
+    return h;
+  }
+  function buildLeft(p){
+    var h = '';
+    if (p.bullets.length) h += '<div class="fzp-section"><p class="fzp-head">Что вы получаете</p><div class="fzp-list">' + p.bullets.map(item).join('') + '</div></div>';
+    if (p.benefits.length) h += '<div class="fzp-section"><p class="fzp-head">Преимущества кованых дисков от Forza Wheels</p><div class="fzp-list">' + p.benefits.map(item).join('') + '</div></div>';
+    return h;
+  }
+  function buildRight(p){
+    var h = '';
+    if (p.process.length) h += '<div class="fzp-section"><p class="fzp-head">Процесс заказа</p><div class="fzp-steps">' + p.process.map(function(t, i){ return step(i + 1, t); }).join('') + '</div></div>';
+    if (p.pay) h += '<div class="fzp-section"><div class="fzp-callout"><div class="fzp-callout-text">Оплата: <b>' + esc(p.pay.replace(/\.$/, '')) + '</b></div></div></div>';
+    if (p.how.length) h += '<div class="fzp-section"><p class="fzp-head">Как мы работаем</p><div class="fzp-steps">' + p.how.map(function(t, i){ return step(i + 1, t); }).join('') + '</div></div>';
+    h += '<div class="fzp-section"><div class="fzp-callout"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div class="fzp-callout-text">Есть вопросы? Звоните: <b>8 (701) 940-24-22</b></div></div></div>';
+    return h;
+  }
+  function sync(){
+    var cols = Array.prototype.slice.call(document.querySelectorAll('.t-store__prod-popup__col-right'));
+    var colRight = cols.filter(function(c){ return c.offsetParent; })[0] || cols[0];
+    var textEl = (colRight && colRight.querySelector('.js-store-prod-all-text')) || document.querySelector('.js-store-prod-all-text');
+    if (!textEl || !colRight || !colRight.offsetParent) return;
+    var raw = textEl.innerHTML;
+    var parent = textEl.parentElement;
+    var top = parent.querySelector(':scope > .fzp-descr');
+    var productRoot = colRight.parentElement && colRight.parentElement.parentElement;
+    var grid = productRoot ? productRoot.querySelector(':scope > .fzp-grid') : null;
+    var ok = raw && raw.indexOf(KEY) !== -1 && raw.indexOf(BRAND_GATE) === -1;
+    if (!ok) { if (top) { textEl.style.display = ''; top.style.display = 'none'; } if (grid) grid.style.display = 'none'; return; }
+    if (top && textEl.style.display === 'none' && top.getAttribute('data-raw') === String(raw.length) && grid && grid.style.display !== 'none') return;
+    var p = parse(raw);
+    if (!top) { top = document.createElement('div'); top.className = 'fzp-descr'; parent.appendChild(top); }
+    top.innerHTML = buildTop(p); top.setAttribute('data-raw', String(raw.length)); top.style.display = '';
+    textEl.style.display = 'none';
+    if (productRoot) {
+      if (!grid) { grid = document.createElement('div'); grid.className = 'fzp-grid'; grid.innerHTML = '<div class="fzp-descr fzp-card fzp-l"></div><div class="fzp-descr fzp-card fzp-r"></div>'; productRoot.appendChild(grid); }
+      grid.querySelector('.fzp-l').innerHTML = buildLeft(p);
+      grid.querySelector('.fzp-r').innerHTML = buildRight(p);
+      grid.style.display = '';
+    }
+  }
+  function start(){
+    var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+    sync();
+    var pending = false;
+    new MutationObserver(function(){ if (pending) return; pending = true; requestAnimationFrame(function(){ pending = false; sync(); }); }).observe(document.body, { childList:true, subtree:true, characterData:true });
+    function later(){ setTimeout(sync, 60); setTimeout(sync, 400); }
+    document.addEventListener('click', later, true);
+    window.addEventListener('popstate', later);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script>
+<!-- FZP-END -->
