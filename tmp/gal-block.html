@@ -85,6 +85,7 @@
   if(!root||!mo||!dov)return;
   document.body.appendChild(mo);document.body.appendChild(dov);
   var D=null,st={b:'',m:'',d:''},modal='',CHEV='<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>',XI='<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  function pl(n){var a=n%10,b=n%100;return n+' '+(a===1&&b!==11?'проект':(a>=2&&a<=4&&(b<10||b>=20)?'проекта':'проектов'))}
   function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function brandObj(k){for(var i=0;i<D.brands.length;i++)if(D.brands[i].k===k)return D.brands[i]}
   function models(){return (D&&st.b&&D.models[st.b])||null}
@@ -154,10 +155,10 @@
     q=(q||'').toLowerCase().trim();var g=$('fzgfG'),h='';g.className='fzgf-m__g'+(modal==='m'?' mod':'');
     if(modal==='b'){
       D.brands.forEach(function(b){if(q&&b.n.toLowerCase().indexOf(q)<0)return;
-        h+='<button type="button" class="fzgf-m__i" data-k="'+esc(b.k)+'"><img class="lg" src="'+LOGO+esc(b.f)+'" alt="" loading="lazy">'+esc(b.n)+'<small>'+b.c+' проектов</small></button>'});
+        h+='<button type="button" class="fzgf-m__i" data-k="'+esc(b.k)+'"><img class="lg" src="'+LOGO+esc(b.f)+'" alt="" loading="lazy">'+esc(b.n)+'<small>'+pl(b.c)+'</small></button>'});
     }else if(modal==='m'){
       (models()||[]).forEach(function(m){if(q&&m.t.toLowerCase().indexOf(q)<0&&m.s.toLowerCase().indexOf(q)<0)return;
-        h+='<button type="button" class="fzgf-m__i" data-k="'+esc(m.id)+'"><img class="pic" src="'+esc(m.i)+'" alt="" loading="lazy">'+esc(m.t)+'<small>'+esc(m.s)+' · '+m.u.length+' проектов</small></button>'});
+        h+='<button type="button" class="fzgf-m__i" data-k="'+esc(m.id)+'"><img class="pic" src="'+esc(m.i)+'" alt="" loading="lazy">'+esc(m.t)+'<small>'+esc(m.s)+' · '+pl(m.u.length)+'</small></button>'});
     }else{
       var m=modelObj(st.m);((m&&m.d)||[]).forEach(function(id){var d=D.disks[id];if(!d)return;var t=d.z+' · '+d.l;if(q&&t.toLowerCase().indexOf(q)<0)return;
         h+='<button type="button" class="fzgf-m__i" data-k="'+esc(id)+'"><img class="dsk" src="'+esc(d.i)+'" alt="" loading="lazy">'+esc(d.z)+'<small>'+esc(d.l)+'</small></button>'});
