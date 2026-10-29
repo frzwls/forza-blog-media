@@ -717,7 +717,7 @@
       }
 
       function choose(){
-        if (step.key === 'brand' && selection.brand !== opt.v){ selection.model = ''; selection.modelTitle = ''; selection.disk = null; selection.diskLabel = ''; selection.diskUrl = ''; }
+        if (step.key === 'brand' && selection.brand !== opt.v){ selection.model = undefined; selection.modelTitle = ''; selection.disk = null; selection.diskLabel = ''; selection.diskUrl = ''; }
         selection[step.key] = opt.v;
         var shouldAdvance = step.key === 'diameter' || (step.key === 'brand' && !opt.other);
         function go(){
@@ -902,6 +902,12 @@
       });
       if (byD.length) list = byD; else if (list.length) note = 'diam';
     }
+    var cls = fzClass();
+    var minD = (cls === 'suv' || cls === 'off' || cls === 'lux') ? 19 : (cls === 'sport' ? 18 : 0);
+    if (minD) list.forEach(function(c){
+      var ds = fzDiams(c.d);
+      if (ds && Math.max.apply(null, ds) < minD) c.score -= 60;
+    });
     list.sort(function(a, b){ return b.score - a.score; });
     return { list: list, note: note };
   }
@@ -964,7 +970,7 @@
     grid.className = 'option-grid style-grid';
     function addCard(id, title, subText, img){
       var card = document.createElement('div');
-      card.className = 'option-card photo' + ((selection.model || '') === id ? ' selected' : '');
+      card.className = 'option-card photo' + (selection.model !== undefined && (selection.model || '') === id ? ' selected' : '');
       card.tabIndex = 0;
       var bg = document.createElement('div');
       bg.className = 'photo-bg' + (img ? '' : ' placeholder');
